@@ -5,22 +5,47 @@ void setup()
 }
 void draw()
 {
-	//your code here
+	for(int x; x < 3; x++){
+
 }
-class NormalParticle
-{
-	//your code here
 }
-interface Particle
+class NormalParticle implements Particle
 {
-	//your code here
+	double myX,myY,myAngle,mySpeed;
+public void move(){
+myX = Math.cos(myAngle) * mySpeed + myX;
+myY = Math.sin(myAngle) * mySpeed + myY;
 }
-class OddballParticle //uses an interface
-{
-	//your code here
-}
-class JumboParticle //uses inheritance
-{
-	//your code here
+public void show(){ellipse(20,20,(float)myX,(float)myY);}
+public NormalParticle(){
+myX = 23;
+myY = 24;
+myAngle = 23;
+mySpeed = 24;
+
 }
 
+}
+
+
+interface Particle
+{
+public void show();
+public void move();
+} 
+class OddballParticle implements Particle
+double newX,newY,newSpeed,newAngle;
+
+{
+	public void move(){
+newX = newSpeed + newX;
+newY = newY+=30;
+}
+public void show(){rect(23,23,(float)newX,(float)newY);}
+
+class JumboParticle extends NormalParticle
+{
+public void show(){ellipse(50,50,(float)myX,(float)myY);}
+
+  
+}
