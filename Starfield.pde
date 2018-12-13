@@ -3,18 +3,22 @@ int x;
 int y;
 int p;
 Particle cry; 
+Particle goHard;
 void setup()
 {
  crabs = new Particle[100];
  for(int i = 0; i < crabs.length; i++){
    crabs[i] = new NormalParticle();
  }
+ goHard = new OddballParticle();
  
-size(500,500);
+ 
+size(1000,1000);
  frameRate(10);
 }
 void draw()
 {
+   
    fill((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
    stroke((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
    strokeWeight(3);
@@ -24,6 +28,8 @@ void draw()
    text("frame rate: " + frameRate, 210, 400);
    for(int i=0; i<crabs.length; i++)
   {
+    goHard.move();
+    goHard.show();
     crabs[i].move();
     crabs[i].show();
   }
@@ -36,10 +42,10 @@ class NormalParticle implements Particle
 {
 	double myX,myY,myAngle,mySpeed;
 public void move(){
-myX = Math.cos(myAngle) * mySpeed + myX;
-myY = Math.sin(myAngle) * mySpeed + myY;
+myAngle =  Math.random()*2000+ myX;
+mySpeed =  Math.random()*1000+ myY;
 }
-public void show(){ellipse(20,20,(float)myX,(float)myY);}
+public void show(){ellipse((float)myAngle,(float)mySpeed,(float)myX,(float)myY);}
 public NormalParticle(){
 
      myX = 23;
@@ -63,10 +69,12 @@ class OddballParticle implements Particle
 {
  double newX,newY,newSpeed,newAngle;
 public void move(){
-newX = newSpeed + newX;
-newY = newY+=30;
+newX = Math.cos(newY) * newSpeed + newX;
+newY = Math.sin(newX) * newSpeed + newY;
+newAngle = 30;
+newSpeed = 30;
 }
-public void show(){rect(23,23,(float)newX,(float)newY);}
+public void show(){rect((float)newAngle,(float)newSpeed,(float)newX,(float)newY);}
 
 class JumboParticle extends NormalParticle
 {
